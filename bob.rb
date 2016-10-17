@@ -1,46 +1,41 @@
-
-
 class Bob
 
-  attr_reader :remark
+  # def yelling(remark)
+  #   remark == remark.upcase && remark !="" && remark != "\t"
+  # end
 
-  def initialize
-    @remark
+  def get_cap_chars(string)
+    string.chars & ("A"..."Z").to_a
   end
 
-  def yelling(remark)
-    remark = self.remark
-    if remark.include? "!" || remark == remark.upcase
-      "Whoa, chill out!"
-    end
+  def get_lower_chars(string)
+    string.chars & ("a"..."z").to_a
   end
+
+  def any_cap_letters?(remark)
+    !get_cap_chars(remark).empty? && get_lower_chars(remark).empty?
+  end
+
 
 
   def question(remark)
-    remark = self.remark
-    if remark.end_with? "?"
-      "Sure"
-    end
+    remark.to_s.end_with? "?"
   end
 
   def blank(remark)
-    remark = self.remark
-    if remark == "" || remark == ' ' || remark == "\t"
-      "Fine. Be that way!"
-    end
+    remark.strip.length == 0
   end
 
-
   def hey(remark)
-    if self.remark != "Hey"
-      "Whatever."
+    if any_cap_letters?(remark) == true
+      "Whoa, chill out!"
+    elsif question(remark) == true
+      "Sure."
+    elsif blank(remark) == true
+      "Fine. Be that way!"
     else
-      "Yay"
+      "Whatever."
     end
   end
 
 end
-
-# blah = Bob.new("WHY")
-#
-# blah.remark
